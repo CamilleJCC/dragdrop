@@ -1,6 +1,45 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themes = document.querySelectorAll('.theme');
     const artworks = document.querySelectorAll('.artwork');
+    // Add this object at the top of your JavaScript
+const validMatches = {
+    'artwork1': ['sueños', 'pesadillas'],
+    'artwork2': ['seres fantásticos', 'cosmos'],
+    'artwork3': ['cosmos', 'piedras'],
+    'artwork4': ['piedras', 'árboles'],
+    'artwork5': ['pesadillas', 'seres fantásticos'],
+    'artwork6': ['árboles', 'sueños']
+};
+
+function validateMatch(theme, artwork) {
+    const artworkId = artwork.dataset.id;
+    const validThemes = validMatches[artworkId];
+    
+    if (validThemes.includes(theme)) {
+        createSuccessMatch(theme, artwork);
+    } else {
+        createTemporaryMatch(theme, artwork);
+    }
+}
+
+function createSuccessMatch(theme, artwork) {
+    const connection = createConnection(theme, artwork);
+    connection.classList.add('success');
+    createSparkles(artwork);
+    
+    // Track completed matches
+    checkGameCompletion();
+}
+
+function createTemporaryMatch(theme, artwork) {
+    const connection = createConnection(theme, artwork);
+    connection.classList.add('temporary');
+    
+    setTimeout(() => {
+        connection.remove();
+    }, 1000);
+}
+
     
     themes.forEach(theme => {
         theme.addEventListener('dragstart', dragStart);
