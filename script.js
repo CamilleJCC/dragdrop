@@ -52,4 +52,32 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => sparkle.remove(), 1000);
         }
     }
+    // Add this to your existing JavaScript
+function createConnection(theme, artwork) {
+    const themeElement = document.querySelector(`[data-theme="${theme}"]`);
+    const connection = document.createElement('div');
+    connection.classList.add('connection-line');
+    
+    // Calculate positions
+    const themeRect = themeElement.getBoundingClientRect();
+    const artworkRect = artwork.getBoundingClientRect();
+    
+    // Set line position and angle
+    const startX = themeRect.left + themeRect.width/2;
+    const startY = themeRect.top + themeRect.height/2;
+    const endX = artworkRect.left + artworkRect.width/2;
+    const endY = artworkRect.top + artworkRect.height/2;
+    
+    const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+    const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+    
+    connection.style.width = `${length}px`;
+    connection.style.transform = `rotate(${angle}deg)`;
+    connection.style.left = `${startX}px`;
+    connection.style.top = `${startY}px`;
+    
+    document.body.appendChild(connection);
+}
+
 });
+
