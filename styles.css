@@ -72,3 +72,23 @@
                     0 0 30px #c4e0ff;
     }
 }
+
+.connection-line {
+    position: fixed;
+    height: 2px;
+    background: linear-gradient(90deg, #c4e0ff, #ffd700);
+    transform-origin: left center;
+    pointer-events: none;
+    z-index: 1000;
+    animation: lineGlow 1.5s infinite alternate;
+}
+
+@keyframes lineGlow {
+    from {
+        filter: drop-shadow(0 0 2px #c4e0ff);
+    }
+    to {
+        filter: drop-shadow(0 0 8px #ffd700);
+    }
+}
+
