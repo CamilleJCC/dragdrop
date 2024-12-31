@@ -1,3 +1,35 @@
+@font-face {
+    font-family: 'InterTight';
+    src: url('assets/Inter-VariableFont_slnt,wght.ttf') format('truetype');
+    font-weight: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: #faf9f1;
+    font-family: 'InterTight', sans-serif;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 3vw;
+    color: #c4e0ff;  /* Your signature blue color */
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-weight: normal;
+}
+
+p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    color: #666;
+}
 .matching-game {
     display: flex;
     justify-content: space-between;
