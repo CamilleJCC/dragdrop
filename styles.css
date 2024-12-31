@@ -1,0 +1,74 @@
+.matching-game {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 4rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 15px;
+}
+
+.artworks-container, .themes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.artwork {
+    width: 300px;
+    height: 200px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.artwork img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.artwork:hover {
+    transform: translateY(-5px);
+}
+
+.theme {
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #c4e0ff, #e8f4ff);
+    border-radius: 25px;
+    cursor: grab;
+    transition: all 0.3s ease;
+    font-family: 'Helvetica Neue', sans-serif;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.theme:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #b3d4ff, #d8ecff);
+}
+
+.theme.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+}
+
+.theme.matched {
+    background: linear-gradient(45deg, #c8ffd0, #e8fff0);
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px #c4e0ff,
+                    0 0 10px #c4e0ff,
+                    0 0 15px #c4e0ff;
+    }
+    to {
+        box-shadow: 0 0 10px #c4e0ff,
+                    0 0 20px #c4e0ff,
+                    0 0 30px #c4e0ff;
+    }
+}
