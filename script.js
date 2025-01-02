@@ -2,123 +2,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const themes = document.querySelectorAll('.theme');
     const artworks = document.querySelectorAll('.artwork');
     let connections = [];
+    let isDrawingLine = false;
+    let currentTheme = null;
+    let currentLine = null;
 
-    const validMatches = {
-        '1': ['sueños', 'pesadillas'],
-        '2': ['seres fantásticos', 'cosmos'],
-        '3': ['cosmos', 'piedras'],
-        '4': ['piedras', 'árboles'],
-        '5': ['pesadillas', 'seres fantásticos'],
-        '6': ['árboles', 'sueños']
-    };
-
-    function validateMatch(theme, artwork) {
-        const artworkId = artwork.dataset.id;
-        const validThemes = validMatches[artworkId];
-        
-        if (validThemes && validThemes.includes(theme)) {
-            createSuccessMatch(theme, artwork);
-            return true;
-        } else {
-            createTemporaryMatch(theme, artwork);
-            return false;
-        }
+    function createLine(theme, startX, startY) {
+        const line = document.createElement('div');
+        line.classList.add('connection-line');
+        line.style.left = `${startX}px`;
+        line.style.top = `${startY}px`;
+        document.body.appendChild(line);
+        return line;
     }
 
-    function createSuccessMatch(theme, artwork) {
-        const connection = createConnection(theme, artwork);
-        connection.classList.add('success');
-        connections.push(connection);
-        
-        const themeElement = document.querySelector(`[data-theme="${theme}"]`);
-        themeElement.classList.add('matched');
-        artwork.classList.add('matched');
-        
-        createSparkles(artwork);
-        checkGameCompletion();
-    }
-
-    function createTemporaryMatch(theme, artwork) {
-        const connection = createConnection(theme, artwork);
-        connection.classList.add('temporary');
-        setTimeout(() => connection.remove(), 1000);
-    }
-
-    function createConnection(theme, artwork) {
-        const themeElement = document.querySelector(`[data-theme="${theme}"]`);
-        const connection = document.createElement('div');
-        connection.classList.add('connection-line');
-        
-        const themeRect = themeElement.getBoundingClientRect();
-        const artworkRect = artwork.getBoundingClientRect();
-        
-        const startX = themeRect.left + themeRect.width/2;
-        const startY = themeRect.top + themeRect.height/2;
-        const endX = artworkRect.left + artworkRect.width/2;
-        const endY = artworkRect.top + artworkRect.height/2;
-        
+    function updateLine(line, startX, startY, endX, endY) {
         const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
         const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
         
-        connection.style.width = `${length}px`;
-        connection.style.transform = `rotate(${angle}deg)`;
-        connection.style.left = `${startX}px`;
-        connection.style.top = `${startY}px`;
-        
-        document.body.appendChild(connection);
-        return connection;
+        line.style.width = `${length}px`;
+        line.style.transform = `rotate(${angle}deg)`;
     }
 
-    function resetGame() {
-        // Remove all connections
-        connections.forEach(connection => connection.remove());
-        connections = [];
-        
-        // Reset all themes and artworks
-        themes.forEach(theme => {
-            theme.classList.remove('matched');
-            theme.classList.remove('dragging');
-        });
-        
-        artworks.forEach(artwork => {
-            artwork.classList.remove('matched');
-            artwork.classList.remove('hover');
-        });
-        
-        createSparkles(document.querySelector('.reset-btn'));
-    }
-
-    // Event Listeners
     themes.forEach(theme => {
-        theme.addEventListener('dragstart', e => {
-            e.target.classList.add('dragging');
-            e.dataTransfer.setData('text/plain', e.target.dataset.theme);
+        theme.addEventListener('mousedown', (e) => {
+            isDrawingLine = true;
+            currentTheme = theme;
+            
+            const themeRect = theme.getBoundingClientRect();
+            const startX = themeRect.left + themeRect.width/2;
+            const startY = themeRect.top + themeRect.height/2;
+            
+            currentLine = createLine(theme, startX, startY);
+            theme.style.zIndex = '1001';
         });
-        
-        theme.addEventListener('dragend', e => {
-            e.target.classList.remove('dragging');
-        });
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDrawingLine && currentLine && currentTheme) {
+            const themeRect = currentTheme.getBoundingClientRect();
+            const startX = themeRect.left + themeRect.width/2;
+            const startY = themeRect.top + themeRect.height/2;
+            
+            updateLine(currentLine, startX, startY, e.clientX, e.clientY);
+        }
     });
 
     artworks.forEach(artwork => {
-        artwork.addEventListener('dragover', e => {
-            e.preventDefault();
-            artwork.classList.add('dragover');
-        });
-        
-        artwork.addEventListener('dragleave', () => {
-            artwork.classList.remove('dragover');
-        });
-        
-        artwork.addEventListener('drop', e => {
-            e.preventDefault();
-            artwork.classList.remove('dragover');
-            const theme = e.dataTransfer.getData('text/plain');
-            validateMatch(theme, artwork);
+        artwork.addEventListener('mouseup', (e) => {
+            if (isDrawingLine && currentLine && currentTheme) {
+                const artworkRect = artwork.getBoundingClientRect();
+                const endX = artworkRect.left + artworkRect.width/2;
+                const endY = artworkRect.top + artworkRect.height/2;
+                
+                updateLine(currentLine, 
+                    currentLine.offsetLeft, 
+                    currentLine.offsetTop, 
+                    endX, 
+                    endY
+                );
+                
+                connections.push(currentLine);
+                createSparkles(artwork);
+            }
+            endDrawing();
         });
     });
 
-    document.querySelector('.reset-btn').addEventListener('click', resetGame);
+    document.addEventListener('mouseup', endDrawing);
+
+    function endDrawing() {
+        if (isDrawingLine && currentLine && !currentLine.parentElement) {
+            currentLine.remove();
+        }
+        isDrawingLine = false;
+        currentLine = null;
+        if (currentTheme) {
+            currentTheme.style.zIndex = '';
+            currentTheme = null;
+        }
+    }
 
     function createSparkles(element) {
         for (let i = 0; i < 20; i++) {
@@ -131,12 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkGameCompletion() {
-        const matchedThemes = document.querySelectorAll('.theme.matched');
-        if (matchedThemes.length === themes.length) {
-            setTimeout(() => {
-                alert('¡Felicitaciones! Has completado el juego ✨');
-            }, 500);
-        }
+    function resetGame() {
+        connections.forEach(connection => connection.remove());
+        connections = [];
+        themes.forEach(theme => {
+            theme.style.zIndex = '';
+        });
+        createSparkles(document.querySelector('.reset-btn'));
     }
+
+    document.querySelector('.reset-btn').addEventListener('click', resetGame);
 });
