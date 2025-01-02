@@ -110,7 +110,7 @@ p {
 .connection-line {
     position: fixed;
     height: 2px;
-    background: linear-gradient(90deg, #c4e0ff, #ffd700);
+    background: linear-gradient(90deg, #c4e0ff, #b5f0de);
     transform-origin: left center;
     pointer-events: none;
     z-index: 1000;
@@ -122,7 +122,7 @@ p {
         filter: drop-shadow(0 0 2px #c4e0ff);
     }
     to {
-        filter: drop-shadow(0 0 8px #ffd700);
+        filter: drop-shadow(0 0 8px #b5f0de);
     }
 }
 
