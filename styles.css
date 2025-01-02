@@ -38,6 +38,7 @@ p {
     align-items: flex-end;
     padding: 0px 80px 80px;
     display: flex;
+    height:100vh;
 }
 
 .matching-game {
