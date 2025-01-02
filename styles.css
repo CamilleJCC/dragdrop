@@ -3,6 +3,7 @@
     src: url('assets/Inter-VariableFont_slnt,wght.ttf') format('truetype');
     font-weight: normal;
 }
+
 * {
     margin: 0;
     padding: 0;
@@ -15,6 +16,7 @@ body {
     font-family: 'InterTight', sans-serif;
 }
 
+/* Typography */
 h1 {
     font-size: 2.5rem;
     color: #c4e0ff;
@@ -29,6 +31,15 @@ p {
     font-size: 16px;
     padding-right: 0;
 }
+
+/* Layout */
+.investigation-container {
+    flex-direction: row;
+    align-items: flex-end;
+    padding: 0px 80px 80px;
+    display: flex;
+}
+
 .matching-game {
     display: flex;
     justify-content: space-between;
@@ -39,7 +50,7 @@ p {
     border-radius: 15px;
     flex-direction: column;
     align-items: center;
-    height:80vh;
+    height: 80vh;
 }
 
 .artworks-container, .themes-container {
@@ -49,6 +60,7 @@ p {
     align-items: center;
 }
 
+/* Artworks */
 .artwork {
     width: fit-content;
     height: 200px;
@@ -67,17 +79,20 @@ p {
     transform: translateY(-5px);
 }
 
+/* Themes */
 .theme {
     padding: 1rem 2rem;
     background: linear-gradient(45deg, #c4e0ff, #b5f0de);
     border-radius: 25px;
     cursor: grab;
     transition: all 0.3s ease;
-    font-family: 'Helvetica Neue', sans-serif;
+    font-family: 'InterTight', sans-serif;
     text-align: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-     -webkit-user-drag: none;
+    -webkit-user-drag: none;
     user-drag: none;
+    position: relative;
+    z-index: 1001;
 }
 
 .theme:hover {
@@ -85,35 +100,7 @@ p {
     background: linear-gradient(45deg, #b3d4ff, #d8ecff);
 }
 
-.theme.dragging {
-    opacity: 0.5;
-    cursor: grabbing;
-}
-
-.theme.matched {
-    background: linear-gradient(45deg, #c8ffd0, #e8fff0);
-    animation: glow 1.5s infinite alternate;
-}
-    .investigation-container {
-        flex-direction: row;
-        align-items: flex-end;
-        padding: 0px 80px 80px;
-        display: flex;
-    }
-
-@keyframes glow {
-    from {
-        box-shadow: 0 0 5px #c4e0ff,
-                    0 0 10px #c4e0ff,
-                    0 0 15px #c4e0ff;
-    }
-    to {
-        box-shadow: 0 0 10px #c4e0ff,
-                    0 0 20px #c4e0ff,
-                    0 0 30px #c4e0ff;
-    }
-}
-
+/* Connection Lines */
 .connection-line {
     position: fixed;
     height: 2px;
@@ -124,16 +111,7 @@ p {
     animation: lineGlow 1.5s infinite alternate;
 }
 
-@keyframes lineGlow {
-    from {
-        filter: drop-shadow(0 0 2px #c4e0ff);
-    }
-    to {
-        filter: drop-shadow(0 0 8px #b5f0de);
-    }
-}
-/* Keep all your existing CSS and add these new styles */
-
+/* Reset Button */
 .drawing-tools {
     margin-top: 2rem;
 }
@@ -156,73 +134,33 @@ p {
     background: linear-gradient(45deg, #b3d4ff, #a5e0ce);
 }
 
-.artwork.dragover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(196, 224, 255, 0.5);
+/* Animations */
+@keyframes lineGlow {
+    from { filter: drop-shadow(0 0 2px #c4e0ff); }
+    to { filter: drop-shadow(0 0 8px #b5f0de); }
 }
 
-.theme.dragging {
-    opacity: 0.5;
-    cursor: grabbing;
-    transform: scale(1.1);
+@keyframes glow {
+    from { box-shadow: 0 0 5px #c4e0ff, 0 0 10px #c4e0ff, 0 0 15px #c4e0ff; }
+    to { box-shadow: 0 0 10px #c4e0ff, 0 0 20px #c4e0ff, 0 0 30px #c4e0ff; }
 }
 
-.theme.matched {
-    background: linear-gradient(45deg, #b5f0de, #c4e0ff);
-    pointer-events: none;
-}
-
-.connection-line.success {
-    height: 3px;
-    background: linear-gradient(90deg, #b5f0de, #c4e0ff);
-}
-
-.connection-line.temporary {
-    opacity: 0.5;
-    animation: fadeOut 1s forwards;
-}
-
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-    }
-}
-
-
+/* Media Queries */
 @media (min-width: 768px) {
     .left-col {
         width: 50%;
-       padding-bottom: 0px;
+        padding-bottom: 0px;
     }
 
-    h1 {
-        font-size: 58px;
-        width: 100%;
-    }
-
-    p {
-        font-size: 18px;
-        padding-right: 20%;
-    }
-    .reveal-btn {
-        width: auto;
-    }
+    h1 { font-size: 58px; width: 100%; }
+    p { font-size: 18px; padding-right: 20%; }
 }
 
 @media (max-width: 1024px) {
-    p {
-        padding-right: 2em;
-    }
+    p { padding-right: 2em; }
 }
 
 @media (max-width: 480px) {
-    .investigation-container {
-        padding: 20px;
-    }
-
-    h1 {
-        font-size: 2rem;
-        width: 100%;
-    }
+    .investigation-container { padding: 20px; }
+    h1 { font-size: 2rem; width: 100%; }
 }
-
