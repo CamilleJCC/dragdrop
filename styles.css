@@ -38,12 +38,15 @@ p {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(5px);
     border-radius: 15px;
+    flex-direction: column;
+    align-items: center;
 }
 
 .artworks-container, .themes-container {
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
 }
 
 .artwork {
