@@ -127,3 +127,46 @@ p {
     }
 }
 
+@media (min-width: 768px) {
+    .investigation-container {
+        flex-direction: row;
+        align-items: flex-end;
+        padding: 0px 80px 80px;
+    }
+
+    .left-col {
+        width: 50%;
+       padding-bottom: 0px;
+    }
+
+    h1 {
+        font-size: 58px;
+        width: 100%;
+    }
+
+    p {
+        font-size: 18px;
+        padding-right: 20%;
+    }
+    .reveal-btn {
+        width: auto;
+    }
+}
+
+@media (max-width: 1024px) {
+    p {
+        padding-right: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .investigation-container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        width: 100%;
+    }
+}
+
