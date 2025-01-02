@@ -71,7 +71,7 @@ p {
 
 .theme {
     padding: 1rem 2rem;
-    background: linear-gradient(45deg, #c4e0ff, #e8f4ff);
+    background: linear-gradient(45deg, #c4e0ff, #b5f0de);
     border-radius: 25px;
     cursor: grab;
     transition: all 0.3s ease;
