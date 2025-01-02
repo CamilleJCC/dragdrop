@@ -131,6 +131,62 @@ p {
         filter: drop-shadow(0 0 8px #b5f0de);
     }
 }
+/* Keep all your existing CSS and add these new styles */
+
+.drawing-tools {
+    margin-top: 2rem;
+}
+
+.reset-btn {
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, #c4e0ff, #b5f0de);
+    border: none;
+    border-radius: 25px;
+    color: #333;
+    cursor: pointer;
+    font-family: 'InterTight', sans-serif;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.reset-btn:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(45deg, #b3d4ff, #a5e0ce);
+}
+
+.artwork.dragover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(196, 224, 255, 0.5);
+}
+
+.theme.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
+    transform: scale(1.1);
+}
+
+.theme.matched {
+    background: linear-gradient(45deg, #b5f0de, #c4e0ff);
+    pointer-events: none;
+}
+
+.connection-line.success {
+    height: 3px;
+    background: linear-gradient(90deg, #b5f0de, #c4e0ff);
+}
+
+.connection-line.temporary {
+    opacity: 0.5;
+    animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
+}
+
 
 @media (min-width: 768px) {
     .left-col {
