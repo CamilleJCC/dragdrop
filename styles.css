@@ -50,7 +50,7 @@ p {
 }
 
 .artwork {
-    width: 300px;
+    width: fit-content;
     height: 200px;
     border-radius: 10px;
     overflow: hidden;
@@ -62,7 +62,7 @@ p {
 .artwork img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .artwork:hover {
