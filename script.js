@@ -6,25 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTheme = null;
     let currentLine = null;
 
-    function createLine(theme, startX, startY) {
-        const line = document.createElement('div');
-        line.classList.add('connection-line');
-        line.style.left = `${startX}px`;
-        line.style.top = `${startY}px`;
-        document.body.appendChild(line);
-        return line;
-    }
-
-    function updateLine(line, startX, startY, endX, endY) {
-        const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
-        const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
-        
-        line.style.width = `${length}px`;
-        line.style.transform = `rotate(${angle}deg)`;
-    }
-
     themes.forEach(theme => {
-        theme.addEventListener('mousedown', (e) => {
+        theme.addEventListener('dragstart', (e) => {
             isDrawingLine = true;
             currentTheme = theme;
             
@@ -34,21 +17,32 @@ document.addEventListener('DOMContentLoaded', () => {
             
             currentLine = createLine(theme, startX, startY);
             theme.style.zIndex = '1001';
-        });
-    });
 
-    document.addEventListener('mousemove', (e) => {
-        if (isDrawingLine && currentLine && currentTheme) {
-            const themeRect = currentTheme.getBoundingClientRect();
-            const startX = themeRect.left + themeRect.width/2;
-            const startY = themeRect.top + themeRect.height/2;
-            
-            updateLine(currentLine, startX, startY, e.clientX, e.clientY);
-        }
+            // Create transparent drag image
+            const img = new Image();
+            e.dataTransfer.setDragImage(img, 0, 0);
+        });
+
+        theme.addEventListener('drag', (e) => {
+            if (isDrawingLine && currentLine && e.clientX !== 0) {
+                const themeRect = currentTheme.getBoundingClientRect();
+                const startX = themeRect.left + themeRect.width/2;
+                const startY = themeRect.top + themeRect.height/2;
+                
+                updateLine(currentLine, startX, startY, e.clientX, e.clientY);
+            }
+        });
+
+        theme.addEventListener('dragend', endDrawing);
     });
 
     artworks.forEach(artwork => {
-        artwork.addEventListener('mouseup', (e) => {
+        artwork.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+
+        artwork.addEventListener('drop', (e) => {
+            e.preventDefault();
             if (isDrawingLine && currentLine && currentTheme) {
                 const artworkRect = artwork.getBoundingClientRect();
                 const endX = artworkRect.left + artworkRect.width/2;
@@ -68,7 +62,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    document.addEventListener('mouseup', endDrawing);
+    function createLine(theme, startX, startY) {
+        const line = document.createElement('div');
+        line.classList.add('connection-line');
+        line.style.left = `${startX}px`;
+        line.style.top = `${startY}px`;
+        document.body.appendChild(line);
+        return line;
+    }
+
+    function updateLine(line, startX, startY, endX, endY) {
+        const length = Math.sqrt(Math.pow(endX - startX, 2) + Math.pow(endY - startY, 2));
+        const angle = Math.atan2(endY - startY, endX - startX) * 180 / Math.PI;
+        
+        line.style.width = `${length}px`;
+        line.style.transform = `rotate(${angle}deg)`;
+    }
 
     function endDrawing() {
         if (isDrawingLine && currentLine && !currentLine.parentElement) {
