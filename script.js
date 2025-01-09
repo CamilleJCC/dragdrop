@@ -93,8 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
             zone.innerHTML = '';
             zone.classList.remove('correct', 'incorrect');
         });
-        createSparkles(document.querySelector('.reset-btn'));
+        createSparkles(document.querySelector('.reveal-btn'));
     }
 
-    document.querySelector('.reset-btn').addEventListener('click', resetGame);
+    document.querySelector('.reveal-btn').addEventListener('click', resetGame);
 });
