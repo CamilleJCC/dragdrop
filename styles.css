@@ -80,7 +80,7 @@ p {
 /* Artworks */
 .artwork {
     width: fit-content;
-    height: 200px;
+    height: 300px;
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
