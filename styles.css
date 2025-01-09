@@ -179,6 +179,29 @@ p {
     75% { transform: translateX(10px); }
 }
 
+.artwork-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.drop-zone {
+    width: 200px; /* Match your artwork width */
+    min-height: 60px;
+    border: 2px dashed var(--gradient-start);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.drop-zone .theme {
+    cursor: default;
+}
+
+
 /* Media Queries */
 @media (min-width: 768px) {
     .left-col {
