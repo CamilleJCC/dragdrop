@@ -28,7 +28,7 @@ body {
 /* Layout */
 .investigation-container {
     flex-direction: row;
-    align-items: flex-end;
+    align-items: center;
     padding: 0px 80px 80px;
     display: flex;
     height: 100vh;
