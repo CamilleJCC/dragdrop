@@ -9,12 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
         // Add more matches as needed
     };
 
-    // Create drop zones for each artwork
+    // Create artwork-dropzone pairs
     artworks.forEach(artwork => {
+        const container = document.createElement('div');
+        container.classList.add('artwork-container');
+        
         const dropZone = document.createElement('div');
         dropZone.classList.add('drop-zone');
         dropZone.dataset.artworkId = artwork.id;
-        artwork.parentElement.appendChild(dropZone);
+        
+        // Move the artwork into the new container
+        artwork.parentNode.insertBefore(container, artwork);
+        container.appendChild(artwork);
+        container.appendChild(dropZone);
     });
 
     themes.forEach(theme => {
@@ -53,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Clone and append the dropped theme
             const droppedTheme = document.getElementById(themeId).cloneNode(true);
+            droppedTheme.setAttribute('draggable', false); // Prevent further dragging
             zone.appendChild(droppedTheme);
             
             // Check if match is correct
