@@ -1,165 +1,80 @@
 @font-face {
     font-family: 'InterTight';
     src: url('assets/Inter-VariableFont_slnt,wght.ttf') format('truetype');
-    font-weight: normal;
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+:root {
+    --primary-color: #87bafa;
+    --secondary-color: #333333;
+    --background-color: #faf9f1;
+    --gradient-start: #c4e0ff;
+    --gradient-end: #b5f0de;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'InterTight', system-ui, -apple-system, sans-serif;
 }
 
-body {
+.investigation-container {
     min-height: 100vh;
-    background: #faf9f1;
-    font-family: 'InterTight', sans-serif;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    background: var(--background-color);
+    padding: clamp(1rem, 3vw, 2rem);
+    color: var(--secondary-color);
 }
 
-/* Typography */
 h1 {
-    font-size: 2.5rem;
-    color: #c4e0ff;
+    font-size: clamp(2rem, 5vw, 4.1rem);
+    color: var(--primary-color);
     text-align: left;
-    line-height: 1em;
+    line-height: 1.1;
     font-weight: normal;
-    margin-bottom: 20px;
+    margin-bottom: clamp(1rem, 3vw, 1.25rem);
 }
 
 p {
     text-align: left;
-    font-size: 16px;
-    padding-right: 0;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    padding-bottom: clamp(1.5rem, 4vw, 2.75rem);
+    padding-right: min(20%, 6rem);
+    color: var(--secondary-color);
+    line-height: 1.2;
 }
 
-/* Layout */
-.investigation-container {
-    flex-direction: row;
-    align-items: flex-end;
-    padding: 0px 80px 80px;
-    display: flex;
-    height:100vh;
-}
-
-.matching-game {
-    display: flex;
-    justify-content: space-between;
-    padding: 0rem 0rem 0rem 2rem;
-    gap: 4rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border-radius: 15px;
-    flex-direction: column;
-    align-items: center;
-    height: 80vh;
-}
-
-.artworks-container, .themes-container {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
-}
-
-/* Artworks */
 .artwork {
-    width: fit-content;
-    height: 200px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    cursor: pointer;
-}
-
-.artwork img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    border-radius: 0.625rem;
+    box-shadow: 0 0 30px rgba(255,255,255,0.1);
     object-fit: contain;
-}
-
-.artwork:hover {
-    transform: translateY(-5px);
-}
-
-/* Themes */
-.theme {
-    padding: 1rem 2rem;
-    background: linear-gradient(45deg, #c4e0ff, #b5f0de);
-    border-radius: 25px;
-    cursor: grab;
-    transition: all 0.3s ease;
-    font-family: 'InterTight', sans-serif;
-    text-align: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: relative;
-    z-index: 1001;
-}
-
-.theme:hover {
-    transform: scale(1.05);
-    background: linear-gradient(45deg, #b3d4ff, #d8ecff);
-}
-
-/* Connection Lines */
-.connection-line {
-    position: fixed;
-    height: 2px;
-    background: linear-gradient(90deg, #c4e0ff, #b5f0de);
-    transform-origin: left center;
-    pointer-events: none;
-    z-index: 1000;
-    animation: lineGlow 1.5s infinite alternate;
-}
-
-/* Reset Button */
-.drawing-tools {
-    margin-top: 2rem;
-}
-
-.reset-btn {
-    padding: 0.8rem 1.5rem;
-    background: linear-gradient(45deg, #c4e0ff, #b5f0de);
-    border: none;
-    border-radius: 25px;
-    color: #333;
-    cursor: pointer;
-    font-family: 'InterTight', sans-serif;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.reset-btn:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(45deg, #b3d4ff, #a5e0ce);
-}
-
-/* Animations */
-@keyframes lineGlow {
-    from { filter: drop-shadow(0 0 2px #c4e0ff); }
-    to { filter: drop-shadow(0 0 8px #b5f0de); }
-}
-
-@keyframes glow {
-    from { box-shadow: 0 0 5px #c4e0ff, 0 0 10px #c4e0ff, 0 0 15px #c4e0ff; }
-    to { box-shadow: 0 0 10px #c4e0ff, 0 0 20px #c4e0ff, 0 0 30px #c4e0ff; }
+    margin-bottom: -1.1875rem;
 }
 
 /* Media Queries */
 @media (min-width: 768px) {
-    .left-col {
-        width: 50%;
-        padding-bottom: 0px;
+    .investigation-container {
+        grid-template-columns: 1fr 1fr;
+        padding: 0rem 4rem;
+        align-items: center;
+        gap: 2rem;
     }
 
-    h1 { font-size: 58px; width: 100%; }
-    p { font-size: 18px; padding-right: 20%; }
+    .left-col {
+        position: sticky;
+        top: 2rem;
+        padding-bottom: 0;
+    }
 }
 
-@media (max-width: 1024px) {
-    p { padding-right: 2em; }
-}
-
-@media (max-width: 480px) {
-    .investigation-container { padding: 20px; }
-    h1 { font-size: 2rem; width: 100%; }
+@media (min-width: 1200px) {
+    .investigation-container {
+        gap: 2rem;
+    }
 }
