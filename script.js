@@ -4,10 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Define correct matches (artwork id : theme id)
     const correctMatches = {
-        'artwork1': 'theme1',
-        'artwork2': 'theme2',
-        // Add more matches as needed
+        'artwork1': 'theme1', // El mago / Pim Pam Pum - Maruja Mallo
+        'artwork2': 'theme2', // El domingo o el celo marino - Óscar Domínguez
+        'artwork3': 'theme3', // Valle boscoso - Ithell Colquhoun
+        'artwork4': 'theme4'  // Paisaje astral - Benjamín Palencia
     };
+
+    // Randomize themes
+    const themesContainer = document.querySelector('.themes-container');
+    const themeElements = Array.from(themes);
+    const tooltipContainer = themesContainer.querySelector('.tooltip-container');
+    
+    // Remove themes and shuffle them
+    themeElements.forEach(theme => theme.remove());
+    shuffleArray(themeElements);
+    
+    // Add themes back in random order
+    themeElements.forEach(theme => {
+        themesContainer.insertBefore(theme, tooltipContainer);
+    });
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
 
     // Create artwork-dropzone pairs
     artworks.forEach(artwork => {
