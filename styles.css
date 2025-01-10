@@ -94,34 +94,21 @@ p {
     height: auto;
 }
 
-.artworks-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    width: 100%;
-}
-
-.artwork-container {
+.artworks-container, .themes-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 1rem;
     align-items: center;
 }
 
+/* Artworks */
 .artwork {
-    width: 100%;
+    width: fit-content;
     height: 300px;
-    aspect-ratio: 1;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
 }
-
-.themes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    margin-top: 2rem;
-}
-
 
 .artwork img {
     width: 100%;
@@ -129,9 +116,12 @@ p {
     object-fit: contain;
 }
 
+.artwork:hover {
+    transform: translateY(-5px);
+}
+
 /* Themes */
 .theme {
-    width: 100%;
     padding: 1rem 2rem;
     background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
     border-radius: 25px;
@@ -147,6 +137,7 @@ p {
     transform: scale(1.05);
     background: linear-gradient(45deg, #b3d4ff, #d8ecff);
 }
+
 
 /* Reset Button */
 .drawing-tools {
