@@ -4,9 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Define correct matches (artwork id : theme id)
     const correctMatches = {
-        'artwork1': 'theme1', // El mago / Pim Pam Pum - Maruja Mallo
+        'artwork3': 'theme1', // El mago / Pim Pam Pum - Maruja Mallo
         'artwork2': 'theme2', // El domingo o el celo marino - Óscar Domínguez
-        'artwork3': 'theme3', // Valle boscoso - Ithell Colquhoun
+        'artwork1': 'theme3', // Valle boscoso - Ithell Colquhoun
         'artwork4': 'theme4'  // Paisaje astral - Benjamín Palencia
     };
 
