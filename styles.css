@@ -39,13 +39,14 @@
 }
 
 .investigation-container {
-    min-height: 100vh;
+  min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2rem;
     background: var(--background-color);
     padding: clamp(1rem, 3vw, 2rem);
     color: var(--secondary-color);
+    align-items: center;
 }
 
 .left-col {
@@ -239,7 +240,7 @@ p {
 /* Media Queries */
 @media (min-width: 768px) {
     .left-col {
-        width: 50%;
+        width: 100%;
         padding-bottom: 0;
     }
     h1 { font-size: 58px; width: 100%; }
