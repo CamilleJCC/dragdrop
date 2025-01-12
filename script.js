@@ -97,10 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const themeId = e.dataTransfer.getData('text/plain');
     const artworkId = zone.dataset.artworkId;
     
-    // Create a clone at full opacity for the drop zone
-    const droppedTheme = document.getElementById(themeId).cloneNode(true);
+    // Get the original theme from the themes container
+    const originalTheme = document.getElementById(themeId);
+    
+    // Create a new clone for the drop zone that stays fully visible
+    const droppedTheme = originalTheme.cloneNode(true);
     droppedTheme.setAttribute('draggable', false);
-    droppedTheme.style.opacity = '1'; // Ensure dropped clone is fully visible
     
     zone.innerHTML = '';
     zone.appendChild(droppedTheme);
@@ -109,10 +111,9 @@ document.addEventListener('DOMContentLoaded', () => {
         zone.classList.add('correct');
         createSparkles(zone);
         
-        // Make the original source pill semi-transparent
-        const sourceTheme = document.getElementById(themeId);
-        sourceTheme.style.opacity = '0.5';
-        sourceTheme.setAttribute('draggable', false);
+        // Make the original theme in the themes container semi-transparent
+        originalTheme.style.opacity = '0.5';
+        originalTheme.setAttribute('draggable', false);
         
         matchedCount++;
         if (matchedCount === totalMatches) {
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 });
+
 
     });
 
