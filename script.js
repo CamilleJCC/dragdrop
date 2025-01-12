@@ -91,39 +91,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         zone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            zone.classList.remove('drag-over');
-            
-            const themeId = e.dataTransfer.getData('text/plain');
-            const artworkId = zone.dataset.artworkId;
-            
-            zone.innerHTML = '';
-            
-            const droppedTheme = document.getElementById(themeId).cloneNode(true);
-            droppedTheme.setAttribute('draggable', false);
-            zone.appendChild(droppedTheme);
-            
-            if (correctMatches[artworkId] === themeId) {
-                zone.classList.add('correct');
-                createSparkles(zone);
-                
-                // Make original theme semi-transparent and non-draggable
-                const originalTheme = document.getElementById(themeId);
-                originalTheme.style.opacity = '0.5';
-                originalTheme.setAttribute('draggable', false);
-                
-                matchedCount++;
-                if (matchedCount === totalMatches) {
-                    createVictoryConfetti();
-                }
-            } else {
-                zone.classList.add('incorrect');
-                setTimeout(() => {
-                    zone.classList.remove('incorrect');
-                    zone.innerHTML = '';
-                }, 1000);
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    
+    const themeId = e.dataTransfer.getData('text/plain');
+    const artworkId = zone.dataset.artworkId;
+    
+    zone.innerHTML = '';
+    
+    const droppedTheme = document.getElementById(themeId).cloneNode(true);
+    droppedTheme.setAttribute('draggable', false);
+    zone.appendChild(droppedTheme);
+    
+    if (correctMatches[artworkId] === themeId) {
+        zone.classList.add('correct');
+        createSparkles(zone);
+        
+        // Keep the matched theme at full opacity
+        const originalTheme = document.getElementById(themeId);
+        themes.forEach(theme => {
+            if (theme.id !== themeId) {
+                theme.style.opacity = '0.5';
+                theme.setAttribute('draggable', false);
             }
         });
+        
+        matchedCount++;
+        if (matchedCount === totalMatches) {
+            createVictoryConfetti();
+        }
+    } else {
+        zone.classList.add('incorrect');
+        setTimeout(() => {
+            zone.classList.remove('incorrect');
+            zone.innerHTML = '';
+        }, 1000);
+    }
+});
     });
 
     function resetGame() {
