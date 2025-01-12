@@ -228,6 +228,24 @@ p {
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
 }
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    animation: confettiFall 3s linear forwards;
+    z-index: 9999;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(-100vh) rotate(0deg);
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+    }
+}
+
 
 /* Animations */
 @keyframes shake {
