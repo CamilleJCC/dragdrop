@@ -1,8 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const themes = document.querySelectorAll('.theme');
     const artworks = document.querySelectorAll('.artwork');
-    
-    // Define correct matches (artwork id : theme id)
+    let matchedCount = 0;
+    const totalMatches = 4; // Total number of matches needed
+
     const correctMatches = {
         'artwork3': 'theme1', // El mago / Pim Pam Pum - Maruja Mallo
         'artwork2': 'theme2', // El domingo o el celo marino - Óscar Domínguez
@@ -10,16 +11,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'artwork4': 'theme4'  // Paisaje astral - Benjamín Palencia
     };
 
-    // Randomize themes
     const themesContainer = document.querySelector('.themes-container');
     const themeElements = Array.from(themes);
     const tooltipContainer = themesContainer.querySelector('.tooltip-container');
     
-    // Remove themes and shuffle them
     themeElements.forEach(theme => theme.remove());
     shuffleArray(themeElements);
     
-    // Add themes back in random order
     themeElements.forEach(theme => {
         themesContainer.insertBefore(theme, tooltipContainer);
     });
@@ -32,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return array;
     }
 
-    // Create artwork-dropzone pairs
     artworks.forEach(artwork => {
         const container = document.createElement('div');
         container.classList.add('artwork-container');
@@ -41,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dropZone.classList.add('drop-zone');
         dropZone.dataset.artworkId = artwork.id;
         
-        // Move the artwork into the new container
         artwork.parentNode.insertBefore(container, artwork);
         container.appendChild(artwork);
         container.appendChild(dropZone);
@@ -59,6 +55,29 @@ document.addEventListener('DOMContentLoaded', () => {
             theme.classList.remove('dragging');
         });
     });
+
+    function createSparkles(element) {
+        for (let i = 0; i < 20; i++) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            element.appendChild(sparkle);
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+    }
+
+    function createVictoryConfetti() {
+        for (let i = 0; i < 100; i++) {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.animationDelay = Math.random() * 3 + 's';
+            confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
 
     const dropZones = document.querySelectorAll('.drop-zone');
     dropZones.forEach(zone => {
@@ -78,18 +97,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const themeId = e.dataTransfer.getData('text/plain');
             const artworkId = zone.dataset.artworkId;
             
-            // Clear previous content
             zone.innerHTML = '';
             
-            // Clone and append the dropped theme
             const droppedTheme = document.getElementById(themeId).cloneNode(true);
-            droppedTheme.setAttribute('draggable', false); // Prevent further dragging
+            droppedTheme.setAttribute('draggable', false);
             zone.appendChild(droppedTheme);
             
-            // Check if match is correct
             if (correctMatches[artworkId] === themeId) {
                 zone.classList.add('correct');
                 createSparkles(zone);
+                
+                // Make original theme semi-transparent and non-draggable
+                const originalTheme = document.getElementById(themeId);
+                originalTheme.style.opacity = '0.5';
+                originalTheme.setAttribute('draggable', false);
+                
+                matchedCount++;
+                if (matchedCount === totalMatches) {
+                    createVictoryConfetti();
+                }
             } else {
                 zone.classList.add('incorrect');
                 setTimeout(() => {
@@ -100,22 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function createSparkles(element) {
-        for (let i = 0; i < 20; i++) {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'sparkle';
-            sparkle.style.left = Math.random() * 100 + '%';
-            sparkle.style.top = Math.random() * 100 + '%';
-            element.appendChild(sparkle);
-            setTimeout(() => sparkle.remove(), 1000);
-        }
-    }
-
     function resetGame() {
         dropZones.forEach(zone => {
             zone.innerHTML = '';
             zone.classList.remove('correct', 'incorrect');
         });
+        themes.forEach(theme => {
+            theme.style.opacity = '1';
+            theme.setAttribute('draggable', true);
+        });
+        matchedCount = 0;
         createSparkles(document.querySelector('.reveal-btn'));
     }
 
