@@ -90,27 +90,29 @@ document.addEventListener('DOMContentLoaded', () => {
             zone.classList.remove('drag-over');
         });
 
-        zone.addEventListener('drop', (e) => {
+   zone.addEventListener('drop', (e) => {
     e.preventDefault();
     zone.classList.remove('drag-over');
     
     const themeId = e.dataTransfer.getData('text/plain');
     const artworkId = zone.dataset.artworkId;
     
-    zone.innerHTML = '';
-    
+    // Create a clone at full opacity for the drop zone
     const droppedTheme = document.getElementById(themeId).cloneNode(true);
     droppedTheme.setAttribute('draggable', false);
+    droppedTheme.style.opacity = '1'; // Ensure dropped clone is fully visible
+    
+    zone.innerHTML = '';
     zone.appendChild(droppedTheme);
     
     if (correctMatches[artworkId] === themeId) {
         zone.classList.add('correct');
         createSparkles(zone);
         
-        // Only change opacity of the matched theme
-        const originalTheme = document.getElementById(themeId);
-        originalTheme.style.opacity = '0.5';
-        originalTheme.setAttribute('draggable', false);
+        // Make the original source pill semi-transparent
+        const sourceTheme = document.getElementById(themeId);
+        sourceTheme.style.opacity = '0.5';
+        sourceTheme.setAttribute('draggable', false);
         
         matchedCount++;
         if (matchedCount === totalMatches) {
