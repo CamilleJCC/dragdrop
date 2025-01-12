@@ -107,14 +107,10 @@ document.addEventListener('DOMContentLoaded', () => {
         zone.classList.add('correct');
         createSparkles(zone);
         
-        // Keep the matched theme at full opacity
+        // Only change opacity of the matched theme
         const originalTheme = document.getElementById(themeId);
-        themes.forEach(theme => {
-            if (theme.id !== themeId) {
-                theme.style.opacity = '0.5';
-                theme.setAttribute('draggable', false);
-            }
-        });
+        originalTheme.style.opacity = '0.5';
+        originalTheme.setAttribute('draggable', false);
         
         matchedCount++;
         if (matchedCount === totalMatches) {
@@ -128,6 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 });
+
     });
 
     function resetGame() {
