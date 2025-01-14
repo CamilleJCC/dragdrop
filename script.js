@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const correctMatches = {
         'artwork2': 'theme1', // El domingo o el celo marino - Óscar Domínguez
         'artwork1': 'theme2', // Valle boscoso - Ithell Colquhoun
-        'artwork4': 'theme3'  // Paisaje astral - Benjamín Palencia
+        'artwork3': 'theme3'  // Paisaje astral - Benjamín Palencia
     };
 
     const themesContainer = document.querySelector('.themes-container');
