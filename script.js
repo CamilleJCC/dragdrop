@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalMatches = 4; // Total number of matches needed
 
     const correctMatches = {
-        'artwork3': 'theme1', // El mago / Pim Pam Pum - Maruja Mallo
-        'artwork2': 'theme2', // El domingo o el celo marino - Óscar Domínguez
-        'artwork1': 'theme3', // Valle boscoso - Ithell Colquhoun
-        'artwork4': 'theme4'  // Paisaje astral - Benjamín Palencia
+        'artwork2': 'theme1', // El domingo o el celo marino - Óscar Domínguez
+        'artwork1': 'theme2', // Valle boscoso - Ithell Colquhoun
+        'artwork4': 'theme3'  // Paisaje astral - Benjamín Palencia
     };
 
     const themesContainer = document.querySelector('.themes-container');
