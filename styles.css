@@ -4,18 +4,21 @@
     font-weight: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'InterTight-Italic';
     src: url('assets/InterTight-Italic.ttf') format('truetype');
     font-weight: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'InterTight-Semibold';
     src: url('assets/InterTight-SemiBold.ttf') format('truetype');
     font-weight: normal;
     font-display: swap;
 }
+
 @font-face {
     font-family: 'InterTight-SemiboldItalic';
     src: url('assets/InterTight-SemiBoldItalic.ttf') format('truetype');
@@ -39,10 +42,12 @@
 }
 
 .investigation-container {
-  min-height: 100vh;
+    min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(300px, 1fr) minmax(400px, 1fr);
     gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
     background: var(--background-color);
     padding: clamp(1rem, 3vw, 2rem);
     color: var(--secondary-color);
@@ -55,11 +60,11 @@
 }
 
 .semibold {
-  font-family: 'InterTight-Semibold';
+    font-family: 'InterTight-Semibold';
 }
 
 .italic {
-  font-family: 'InterTight-Italic';
+    font-family: 'InterTight-Italic';
 }
 
 h1 {
@@ -70,7 +75,8 @@ h1 {
     font-weight: normal;
     margin-bottom: clamp(1rem, 3vw, 1.25rem);
 }
-h2{
+
+h2 {
     padding-right: min(20%, 6rem);
 }
 
@@ -92,27 +98,32 @@ p {
     backdrop-filter: blur(5px);
     border-radius: 15px;
     height: auto;
+    width: 100%;
+    max-width: 100%;
+    overflow: visible;
 }
 
 .artworks-container, .themes-container {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 1rem;
-    align-items: center;
+    width: 100%;
 }
 
-/* Artworks */
 .artwork {
-    width: fit-content;
     height: 300px;
+    width: auto;
+    max-width: 100%;
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
 
 .artwork img {
-    width: auto;
     height: 100%;
+    width: auto;
+    max-width: 100%;
     object-fit: contain;
 }
 
@@ -120,7 +131,6 @@ p {
     transform: translateY(-5px);
 }
 
-/* Themes */
 .theme {
     padding: 1rem 2rem;
     background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
@@ -138,8 +148,6 @@ p {
     background: linear-gradient(45deg, #b3d4ff, #d8ecff);
 }
 
-
-/* Reset Button */
 .drawing-tools {
     margin-top: 2rem;
 }
@@ -159,7 +167,6 @@ p {
     background: #c4e0ff;
 }
 
-/* Drop Zone Styles */
 .artwork-container {
     display: flex;
     flex-direction: column;
@@ -197,6 +204,7 @@ p {
     background: rgba(244, 67, 54, 0.1);
     animation: shake 0.5s ease-in-out;
 }
+
 .tooltip-container {
     position: relative;
     display: inline-block;
@@ -228,6 +236,7 @@ p {
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
 }
+
 .confetti {
     position: fixed;
     width: 10px;
@@ -246,15 +255,12 @@ p {
     }
 }
 
-
-/* Animations */
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     75% { transform: translateX(10px); }
 }
 
-/* Media Queries */
 @media (max-width: 768px) {
     .investigation-container {
         grid-template-columns: 1fr;
@@ -303,9 +309,13 @@ p {
         margin-top: 10px;
         width: 90vw;
     }
-}
-
-@media (max-width: 480px) {
-    .investigation-container { padding: 20px; }
-    h1 { font-size: 2rem; width: 100%; }
+    
+    .investigation-container { 
+        padding: 20px; 
+    }
+    
+    h1 { 
+        font-size: 2rem; 
+        width: 100%; 
+    }
 }
