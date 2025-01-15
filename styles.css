@@ -267,8 +267,6 @@ p {
     
     .artwork {
         width: 100%;
-        height: auto;
-        max-height: 250px;
     }
     
     .artwork img {
