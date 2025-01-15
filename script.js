@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const themes = document.querySelectorAll('.theme');
     const artworks = document.querySelectorAll('.artwork');
     let matchedCount = 0;
-    const totalMatches = 4; // Total number of matches needed
+    const totalMatches = 3; // Total number of matches needed
 
     const correctMatches = {
         'artwork2': 'theme1', // El domingo o el celo marino - Óscar Domínguez
