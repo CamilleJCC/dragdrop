@@ -44,7 +44,7 @@
 .investigation-container {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: minmax(300px, 1fr) minmax(400px, 1fr);
+    grid-template-columns: 45% 55%;
     gap: 2rem;
     max-width: 1400px;
     margin: 0 auto;
@@ -99,32 +99,27 @@ p {
     border-radius: 15px;
     height: auto;
     width: 100%;
-    max-width: 100%;
     overflow: visible;
 }
 
 .artworks-container, .themes-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
     gap: 1rem;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
 }
 
 .artwork {
-    height: 300px;
+ height: 300px;
     width: auto;
-    max-width: 100%;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    cursor: pointer;
+    flex-shrink: 0;
 }
 
 .artwork img {
-    height: 100%;
+height: 100%;
     width: auto;
-    max-width: 100%;
-    object-fit: contain;
 }
 
 .artwork:hover {
