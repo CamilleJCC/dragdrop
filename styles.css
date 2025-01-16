@@ -42,7 +42,6 @@
   min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
     background: var(--background-color);
     padding: clamp(1rem, 3vw, 2rem);
     color: var(--secondary-color);
