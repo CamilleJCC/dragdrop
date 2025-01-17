@@ -123,7 +123,7 @@ p {
 .theme {
     padding: 1rem 2rem;
     background: #b5f0de;
-    border-radius: 25px;
+    border-radius: 100px;
     cursor: grab;
     transition: all 0.3s ease;
     text-align: center;
@@ -167,10 +167,10 @@ p {
 }
 
 .drop-zone {
-    width: 200px;
+    width: 80%;
     min-height: 60px;
     border: 2px dashed var(--gradient-start);
-    border-radius: 10px;
+    border-radius: 100px;
     transition: all 0.3s ease;
     display: flex;
     align-items: center;
