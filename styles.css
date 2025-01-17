@@ -195,6 +195,7 @@ p {
     border-color: #f44336;
     background: rgba(244, 67, 54, 0.1);
     animation: shake 0.5s ease-in-out;
+    border-radius: 100px;
 }
 .tooltip-container {
     position: relative;
