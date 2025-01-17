@@ -122,7 +122,7 @@ p {
 /* Themes */
 .theme {
     padding: 1rem 2rem;
-    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    background: #b5f0de;
     border-radius: 25px;
     cursor: grab;
     transition: all 0.3s ease;
@@ -144,7 +144,7 @@ p {
 }
 
 .reveal-btn {
-    background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+    background: #c4e0ff;
     border: none;
     padding: 0.9375rem 1.875rem;
     border-radius: 1.5625rem;
@@ -155,7 +155,7 @@ p {
 }
 
 .reveal-btn:hover {
-    background: #c4e0ff;
+    background: #b5f0de;
 }
 
 /* Drop Zone Styles */
