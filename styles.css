@@ -188,6 +188,7 @@ p {
 .correct {
     border-color: #4CAF50;
     background: rgba(76, 175, 80, 0.1);
+    width:fit-content;
 }
 
 .incorrect {
