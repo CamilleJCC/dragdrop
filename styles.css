@@ -310,7 +310,7 @@ p {
     h1 { font-size: 2rem; width: 100%; }
 }
 @media (max-width: 768px) {
-  .container {
+  .matching-game {
     grid-template-columns: 1fr;
     gap: 2rem;
     padding: 2rem;
