@@ -52,6 +52,12 @@
     width: 100%;
     padding-bottom: clamp(1.5rem, 4vw, 2.5rem);
 }
+.game-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
 .semibold {
   font-family: 'InterTight-Semibold';
