@@ -296,6 +296,19 @@ p {
     color: var(--primary-color);
     margin: 1rem 0;
 }
+.artwork {
+    height: 400px;
+    width: auto;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.artwork img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+}
 
 @keyframes confettiFall {
     0% {
