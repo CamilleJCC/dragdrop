@@ -293,9 +293,10 @@ p {
 }
 
 .score-display {
-    font-size: 1.5rem;
     color: var(--primary-color);
     margin: 1rem 0;
+    text-transform: uppercase;
+    font-size: 18px;
 }
 
 .artwork img {
