@@ -418,6 +418,21 @@ background: #c4e0ff;
         width: 200px;
         height: 200px;
     }
+       .results-grid {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .results-grid .artwork {
+        width: 100%;
+        height: auto;
+    }
+
+    .results-grid .artwork img {
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+    }
 }
 
 @media (max-width: 480px) {
