@@ -436,6 +436,21 @@ background: #c4e0ff;
         height: auto;
         max-width: 100%;
     }
+      .tooltip-container {
+        position: relative;
+        width: 100%;
+    }
+
+    .tooltip-text {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 300px;
+        top: 40px;
+        text-align: center;
+        z-index: 1000;
+    }
 }
 
 @media (max-width: 480px) {
