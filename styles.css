@@ -189,7 +189,6 @@ p {
     background: #b5f0de;
     border: none;
     cursor: pointer;
-    display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
