@@ -186,9 +186,19 @@ p {
 }
 
 .correct {
-    border-color: #4CAF50;
-    background: rgba(76, 175, 80, 0.1);
-    width:fit-content;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #b5f0de;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-top: 2px;
+}
 }
 
 .incorrect {
