@@ -49,7 +49,6 @@ class ArtQuiz {
         this.scoreDisplay = document.querySelector('.score-display');
         this.revealBtn = document.querySelector('.reveal-btn');
         
-        // Add next button
         this.nextBtn = document.createElement('button');
         this.nextBtn.className = 'next-btn';
         this.nextBtn.textContent = 'Siguiente';
@@ -68,7 +67,6 @@ class ArtQuiz {
         this.hasAnswered = false;
         this.nextBtn.style.display = 'none';
 
-        // Add artwork number
         const artworkNumber = document.createElement('div');
         artworkNumber.className = 'artwork-number';
         artworkNumber.textContent = `Obra ${this.currentQuestion + 1} de ${gameData.questions.length}`;
@@ -106,7 +104,6 @@ class ArtQuiz {
         buttons[selectedIndex].classList.add(correct ? 'correct' : 'incorrect');
         buttons[question.correctAnswer].classList.add('correct');
 
-        // Show next button or results
         if (this.currentQuestion < gameData.questions.length - 1) {
             this.nextBtn.style.display = 'block';
         } else {
@@ -168,3 +165,7 @@ class ArtQuiz {
         this.progressBar.style.width = `${progress}%`;
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    new ArtQuiz();
+});
