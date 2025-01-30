@@ -122,24 +122,21 @@ showResults() {
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
-    resultsContainer.style.overflow = 'visible'; // Ensure tooltips can overflow
     
     const threeQuestions = gameData.questions.slice(0, 3);
     
     threeQuestions.forEach((question, index) => {
         const resultDiv = document.createElement('div');
         resultDiv.className = 'artwork';
-        resultDiv.style.position = 'relative'; // Position container for tooltip
-        resultDiv.style.marginBottom = '50px'; // Add space for tooltip
         
         const resultContent = `
-            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 300px; width: auto;">
-            <div class="result-info">
-                <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
-                    ${this.userAnswers[index].correct ? '✓' : '✗'}
-                </span>
-            </div>
-            <div class="tooltip-container" style="position: absolute; bottom: -40px; width: 100%;">
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
+            <div class="tooltip-container">
+                <div class="result-info">
+                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
+                        ${this.userAnswers[index].correct ? '✓' : '✗'}
+                    </span>
+                </div>
                 <button class="plus-icon">+</button>
                 <p class="tooltip-text">${question.credit}</p>
             </div>
@@ -147,17 +144,6 @@ showResults() {
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
-
-        resultDiv.querySelector('.plus-icon').addEventListener('click', () => {
-    const tooltipText = resultDiv.querySelector('.tooltip-text');
-    if (tooltipText.style.visibility === 'visible') {
-        tooltipText.style.visibility = 'hidden';
-        tooltipText.style.display = 'none';
-    } else {
-        tooltipText.style.visibility = 'visible';
-        tooltipText.style.display = 'block';
-    }
-});
     });
     
     this.optionsContainer.innerHTML = '';
@@ -169,6 +155,7 @@ showResults() {
         ${this.score === 3 ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
     `;
 }
+
     resetQuiz() {
         this.currentQuestion = 0;
         this.score = 0;
