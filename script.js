@@ -118,6 +118,10 @@ class ArtQuiz {
     }
 
 showResults() {
+    // Hide the current artwork image
+    this.artworkImage.style.display = 'none';
+    
+    // Clear options and hide next button
     this.optionsContainer.innerHTML = '';
     this.nextBtn.style.display = 'none';
     
@@ -139,7 +143,7 @@ showResults() {
             </div>
             <div class="tooltip-container">
                 <button class="plus-icon" id="plusBtn${index}">+</button>
-                <p class="tooltip-text">${question.credit}</p>
+                <p class="tooltip-text" style="visibility: hidden; display: none;">${question.credit}</p>
             </div>
         `;
         
@@ -170,7 +174,6 @@ showResults() {
         ${this.score === 3 ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
     `;
 }
-
     resetQuiz() {
         this.currentQuestion = 0;
         this.score = 0;
