@@ -119,6 +119,7 @@ class ArtQuiz {
 
 showResults() {
     this.artworkImage.style.display = 'none';
+    this.progressBar.style.display = 'none';
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
@@ -130,20 +131,36 @@ showResults() {
         resultDiv.className = 'artwork';
         
         const resultContent = `
-            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 300px; width: auto;">
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
             <div class="tooltip-container">
                 <div class="result-info">
                     <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
                         ${this.userAnswers[index].correct ? '✓' : '✗'}
                     </span>
                 </div>
-                <button class="plus-icon">+</button>
+                <button class="plus-icon" id="plusBtn${index}">+</button>
                 <p class="tooltip-text">${question.credit}</p>
             </div>
         `;
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
+
+        // Add click event listener for the plus button
+        setTimeout(() => {
+            const plusBtn = resultDiv.querySelector('.plus-icon');
+            const tooltipText = resultDiv.querySelector('.tooltip-text');
+            
+            plusBtn.addEventListener('click', () => {
+                if (tooltipText.style.visibility === 'visible') {
+                    tooltipText.style.visibility = 'hidden';
+                    tooltipText.style.display = 'none';
+                } else {
+                    tooltipText.style.visibility = 'visible';
+                    tooltipText.style.display = 'block';
+                }
+            });
+        }, 0);
     });
     
     this.optionsContainer.innerHTML = '';
@@ -155,6 +172,8 @@ showResults() {
         ${this.score === 3 ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
     `;
 }
+
+
 
     resetQuiz() {
         this.currentQuestion = 0;
