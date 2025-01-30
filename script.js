@@ -118,14 +118,15 @@ class ArtQuiz {
     }
 
 showResults() {
-    this.optionsContainer.innerHTML = '';
+    this.optionsContainer.innerHTML = ''; // Clear previous content
     this.nextBtn.style.display = 'none';
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
     
-    // Only iterate through the 3 questions
-    for(let i = 0; i < 3; i++) {
+    // Explicitly loop through only the first 3 items
+    const totalArtworks = 3;
+    for(let i = 0; i < totalArtworks; i++) {
         const question = gameData.questions[i];
         const resultDiv = document.createElement('div');
         resultDiv.className = 'artwork result-item';
@@ -149,11 +150,12 @@ showResults() {
         resultsContainer.appendChild(resultDiv);
     }
     
-    this.optionsContainer.appendChild(resultsContainer);
+    // Replace existing content with results
+    this.optionsContainer.replaceChildren(resultsContainer);
 
     this.scoreDisplay.innerHTML = `
-        Score: ${this.score} / ${gameData.questions.length}
-        ${this.score === gameData.questions.length ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
+        Score: ${this.score} / ${totalArtworks}
+        ${this.score === totalArtworks ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
     `;
 }
 
