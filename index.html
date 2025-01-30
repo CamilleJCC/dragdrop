@@ -8,14 +8,28 @@
 </head>
 <body>
     <div class="investigation-container">
-        <div class="left-col">
-            <h1>ADIVINA ADIVINANZA </h1>
-<h2> Mira estas pinturas surrealistas. </h2><br>
-            <p>¿Qué título crees o sientes que corresponde a cada una?</p>
-            <div class="drawing-tools">
-                 <button class="reveal-btn">Comenzar de nuevo <img src="assets/flecha.svg" width="11px"></button>
+    <div class="left-col">
+        <h1>ADIVINA ADIVINANZA</h1>
+        <h2>Mira estas pinturas surrealistas.</h2><br>
+        <p>¿Qué título crees o sientes que corresponde a cada una?</p>
+        <div class="score-display">
+            <span class="current-score">0</span> / <span class="total-questions">3</span>
+        </div>
+        <button class="reveal-btn">Comenzar de nuevo <img src="assets/flecha.svg" width="11px"></button>
+    </div>
+    
+    <div class="game-container">
+        <div class="question-container">
+            <img id="current-artwork" src="" alt="Obra surrealista">
+            <div class="options-container">
+                <!-- Options will be dynamically inserted here -->
             </div>
         </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+    </div>
+</div>
         
         <div class="game-container">
             <div class="artworks-container">
@@ -28,12 +42,6 @@
                 <div class="artwork" id="artwork3">
                     <img src="assets/26. Pdte..jpg" alt="Obra surrealista 3">
                 </div>
-            </div>
-            
-            <div class="themes-container">
-                <div class="theme" id="theme1" draggable="true"><span class="italic">El domingo o el celo marino,</span> del pintor <span class="semibold">Óscar Domínguez</span></div>
-                <div class="theme" id="theme2" draggable="true"><span class="italic">Valle boscoso,</span> de la pintora <span class="semibold">Ithell Colquhoun</span></div>
-                <div class="theme" id="theme3" draggable="true"><span class="italic">Paisaje astral,</span> del pintor <span class="semibold">Benjamín Palencia</span></div>
             </div>
         </div>
     </div>
