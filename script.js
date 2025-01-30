@@ -1,5 +1,8 @@
+
+// Update the second question's correctAnswer
 const gameData = {
     questions: [
+        // First question remains the same
         {
             image: "assets/9..jpg",
             options: [
@@ -10,6 +13,7 @@ const gameData = {
             correctAnswer: 1,
             credit: "© Valle boscoso, Ithell Colquhoun"
         },
+        // Corrected second question
         {
             image: "assets/6. copia.jpg",
             options: [
@@ -17,9 +21,10 @@ const gameData = {
                 "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>",
                 "<span class='italic'>Valle boscoso,</span> de la pintora <span class='semibold'>Ithell Colquhoun</span>"
             ],
-            correctAnswer: 0,
-            credit: "© Paisaje astral, Benjamín Palencia"
+            correctAnswer: 1, // Changed to index 1 for "El domingo o el celo marino"
+            credit: "© El domingo o el celo marino, Óscar Domínguez"
         },
+        // Third question remains the same
         {
             image: "assets/26. Pdte..jpg",
             options: [
@@ -60,32 +65,30 @@ class ArtQuiz {
         this.displayQuestion();
     }
 
-    displayQuestion() {
-        const question = gameData.questions[this.currentQuestion];
-        this.artworkImage.src = question.image;
-        this.optionsContainer.innerHTML = '';
-        this.hasAnswered = false;
-        this.nextBtn.style.display = 'none';
+ displayQuestion() {
+    const question = gameData.questions[this.currentQuestion];
+    this.artworkImage.src = question.image;
+    this.optionsContainer.innerHTML = '';
+    this.hasAnswered = false;
+    this.nextBtn.style.display = 'none';
 
-        const artworkNumber = document.createElement('div');
-        artworkNumber.className = 'artwork-number';
-        artworkNumber.textContent = `Obra ${this.currentQuestion + 1} de ${gameData.questions.length}`;
-        this.optionsContainer.appendChild(artworkNumber);
+    // Update score display to show current artwork number
+    this.scoreDisplay.innerHTML = `Obra ${this.currentQuestion + 1} de ${gameData.questions.length}`;
 
-        question.options.forEach((option, index) => {
-            const button = document.createElement('button');
-            button.className = 'option-button';
-            button.innerHTML = option;
-            button.addEventListener('click', () => {
-                if (!this.hasAnswered) {
-                    this.checkAnswer(index);
-                }
-            });
-            this.optionsContainer.appendChild(button);
+    question.options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.className = 'option-button';
+        button.innerHTML = option;
+        button.addEventListener('click', () => {
+            if (!this.hasAnswered) {
+                this.checkAnswer(index);
+            }
         });
+        this.optionsContainer.appendChild(button);
+    });
 
-        this.updateProgress();
-    }
+    this.updateProgress();
+}
 
     checkAnswer(selectedIndex) {
         const question = gameData.questions[this.currentQuestion];
@@ -118,39 +121,37 @@ class ArtQuiz {
         }
     }
 
-    showResults() {
-        this.optionsContainer.innerHTML = '';
-        this.nextBtn.style.display = 'none';
+showResults() {
+    const resultsContainer = document.createElement('div');
+    resultsContainer.className = 'results-grid';
+    
+    gameData.questions.forEach((question, index) => {
+        const resultDiv = document.createElement('div');
+        resultDiv.className = 'artwork result-item';
         
-        const resultsContainer = document.createElement('div');
-        resultsContainer.className = 'results-grid';
-        
-        gameData.questions.forEach((question, index) => {
-            const resultDiv = document.createElement('div');
-            resultDiv.className = 'artwork result-item';
-            
-            const resultContent = `
-                <img src="${question.image}" alt="Artwork ${index + 1}">
-                <div class="result-info">
-                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
-                        ${this.userAnswers[index].correct ? '✓' : '✗'}
-                    </span>
-                    <div class="plus-icon" data-index="${index}">+</div>
-                    <div class="tooltip-text">${question.credit}</div>
-                </div>
-            `;
-            
-            resultDiv.innerHTML = resultContent;
-            resultsContainer.appendChild(resultDiv);
-        });
-        
-        this.optionsContainer.appendChild(resultsContainer);
-
-        this.scoreDisplay.innerHTML = `
-            Score: ${this.score} / ${gameData.questions.length}
-            ${this.score === gameData.questions.length ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
+        const resultContent = `
+            <img src="${question.image}" alt="Artwork ${index + 1}">
+            <div class="result-info">
+                <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
+                    ${this.userAnswers[index].correct ? '✓' : '✗'}
+                </span>
+                <div class="plus-icon" data-index="${index}">+</div>
+                <div class="tooltip-text">${question.credit}</div>
+            </div>
         `;
-    }
+        
+        resultDiv.innerHTML = resultContent;
+        resultsContainer.appendChild(resultDiv);
+    });
+    
+    // Append results at the bottom
+    document.querySelector('.game-container').appendChild(resultsContainer);
+
+    this.scoreDisplay.innerHTML = `
+        Score: ${this.score} / ${gameData.questions.length}
+        ${this.score === gameData.questions.length ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
+    `;
+}
 
     resetQuiz() {
         this.currentQuestion = 0;
