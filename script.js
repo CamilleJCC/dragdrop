@@ -147,6 +147,17 @@ showResults() {
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
+
+        resultDiv.querySelector('.plus-icon').addEventListener('click', () => {
+    const tooltipText = resultDiv.querySelector('.tooltip-text');
+    if (tooltipText.style.visibility === 'visible') {
+        tooltipText.style.visibility = 'hidden';
+        tooltipText.style.display = 'none';
+    } else {
+        tooltipText.style.visibility = 'visible';
+        tooltipText.style.display = 'block';
+    }
+});
     });
     
     this.optionsContainer.innerHTML = '';
