@@ -1,58 +1,140 @@
-.question-container {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    width: 100%;
+const gameData = {
+    questions: [
+        {
+            image: "assets/9..jpg",
+            options: [
+                "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>",
+                "<span class='italic'>Valle boscoso,</span> de la pintora <span class='semibold'>Ithell Colquhoun</span>",
+                "<span class='italic'>Paisaje astral,</span> del pintor <span class='semibold'>Benjamín Palencia</span>"
+            ],
+            correctAnswer: 1,
+            credit: "© Valle boscoso, Ithell Colquhoun"
+        },
+        {
+            image: "assets/6. copia.jpg",
+            options: [
+                "<span class='italic'>Paisaje astral,</span> del pintor <span class='semibold'>Benjamín Palencia</span>",
+                "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>",
+                "<span class='italic'>Valle boscoso,</span> de la pintora <span class='semibold'>Ithell Colquhoun</span>"
+            ],
+            correctAnswer: 0,
+            credit: "© Paisaje astral, Benjamín Palencia"
+        },
+        {
+            image: "assets/26. Pdte..jpg",
+            options: [
+                "<span class='italic'>Valle boscoso,</span> de la pintora <span class='semibold'>Ithell Colquhoun</span>",
+                "<span class='italic'>Paisaje astral,</span> del pintor <span class='semibold'>Benjamín Palencia</span>",
+                "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>"
+            ],
+            correctAnswer: 2,
+            credit: "© El domingo o el celo marino, Óscar Domínguez"
+        }
+    ]
+};
+
+class ArtQuiz {
+    constructor() {
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.userAnswers = [];
+        this.init();
+    }
+
+    init() {
+        this.artworkImage = document.getElementById('current-artwork');
+        this.optionsContainer = document.querySelector('.options-container');
+        this.progressBar = document.querySelector('.progress');
+        this.scoreDisplay = document.querySelector('.score-display');
+        this.revealBtn = document.querySelector('.reveal-btn');
+        
+        this.revealBtn.addEventListener('click', () => this.resetQuiz());
+        this.displayQuestion();
+    }
+
+    displayQuestion() {
+        const question = gameData.questions[this.currentQuestion];
+        this.artworkImage.src = question.image;
+        this.optionsContainer.innerHTML = '';
+
+        question.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.className = 'option-button';
+            button.innerHTML = option;
+            button.addEventListener('click', () => this.checkAnswer(index));
+            this.optionsContainer.appendChild(button);
+        });
+
+        this.updateProgress();
+    }
+
+    checkAnswer(selectedIndex) {
+        const question = gameData.questions[this.currentQuestion];
+        const correct = selectedIndex === question.correctAnswer;
+        
+        if (correct) this.score++;
+        
+        this.userAnswers.push({
+            question: this.currentQuestion,
+            correct: correct,
+            selected: selectedIndex
+        });
+
+        const buttons = this.optionsContainer.querySelectorAll('.option-button');
+        buttons[selectedIndex].classList.add(correct ? 'correct' : 'incorrect');
+        buttons[question.correctAnswer].classList.add('correct');
+
+        setTimeout(() => {
+            if (this.currentQuestion < gameData.questions.length - 1) {
+                this.currentQuestion++;
+                this.displayQuestion();
+            } else {
+                this.showResults();
+            }
+        }, 1500);
+    }
+
+    showResults() {
+        this.optionsContainer.innerHTML = '';
+        
+        gameData.questions.forEach((question, index) => {
+            const resultDiv = document.createElement('div');
+            resultDiv.className = 'result-item';
+            
+            const resultContent = `
+                <img src="${question.image}" alt="Artwork ${index + 1}">
+                <div class="result-info">
+                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
+                        ${this.userAnswers[index].correct ? '✓' : '✗'}
+                    </span>
+                    <div class="plus-icon" data-index="${index}">+</div>
+                    <div class="tooltip-text">${question.credit}</div>
+                </div>
+            `;
+            
+            resultDiv.innerHTML = resultContent;
+            this.optionsContainer.appendChild(resultDiv);
+        });
+
+        this.scoreDisplay.innerHTML = `
+            Score: ${this.score} / ${gameData.questions.length}
+            ${this.score === gameData.questions.length ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
+        `;
+    }
+
+    resetQuiz() {
+        this.currentQuestion = 0;
+        this.score = 0;
+        this.userAnswers = [];
+        this.displayQuestion();
+    }
+
+    updateProgress() {
+        const progress = ((this.currentQuestion + 1) / gameData.questions.length) * 100;
+        this.progressBar.style.width = `${progress}%`;
+    }
 }
 
-.options-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1rem;
-}
-
-.option-button {
-    background: var(--gradient-start);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 100px;
-    color: var(--secondary-color);
-    font-size: clamp(1rem, 2vw, 1.125rem);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: left;
-}
-
-.option-button:hover {
-    background: var(--gradient-end);
-    transform: translateX(10px);
-}
-
-.option-button.correct {
-    background: #b5f0de;
-}
-
-.option-button.incorrect {
-    background: #fab8a1;
-}
-
-.progress-bar {
-    width: 100%;
-    height: 4px;
-    background: var(--gradient-start);
-    border-radius: 2px;
-    margin-top: 2rem;
-}
-
-.progress {
-    height: 100%;
-    background: var(--primary-color);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-}
-
-.score-display {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin: 1rem 0;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    new ArtQuiz();
+});
