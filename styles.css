@@ -278,7 +278,7 @@ p {
 }
 
 .progress-bar {
-    width: 100%;
+    width: 50%;
     height: 4px;
     background: var(--gradient-start);
     border-radius: 2px;
