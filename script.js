@@ -121,10 +121,6 @@ showResults() {
     // Hide the current artwork image
     this.artworkImage.style.display = 'none';
     
-    // Clear options and hide next button
-    this.optionsContainer.innerHTML = '';
-    this.nextBtn.style.display = 'none';
-    
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
     
@@ -142,31 +138,18 @@ showResults() {
                 </span>
             </div>
             <div class="tooltip-container">
-                <button class="plus-icon" id="plusBtn${index}">+</button>
-                <p class="tooltip-text" style="visibility: hidden; display: none;">${question.credit}</p>
+                <button class="plus-icon">+</button>
+                <p class="tooltip-text">${question.credit}</p>
             </div>
         `;
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
-
-        // Add click event listener for each plus button
-        setTimeout(() => {
-            const plusBtn = document.getElementById(`plusBtn${index}`);
-            const tooltipText = plusBtn.nextElementSibling;
-            
-            plusBtn.addEventListener('click', () => {
-                if (tooltipText.style.visibility === 'visible') {
-                    tooltipText.style.visibility = 'hidden';
-                    tooltipText.style.display = 'none';
-                } else {
-                    tooltipText.style.visibility = 'visible';
-                    tooltipText.style.display = 'block';
-                }
-            });
-        }, 0);
     });
     
+    // Clear and replace content
+    this.optionsContainer.innerHTML = '';
+    this.nextBtn.style.display = 'none';
     this.optionsContainer.replaceChildren(resultsContainer);
 
     this.scoreDisplay.innerHTML = `
