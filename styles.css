@@ -261,6 +261,7 @@ p {
     cursor: pointer;
     transition: all 0.3s ease;
     text-align: left;
+    width:fit-content;
 }
 
 .option-button:hover {
