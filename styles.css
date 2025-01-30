@@ -194,6 +194,7 @@ p {
     position: relative;
     transition: all 0.3s ease;
     margin-top: 2px;
+    display:flex;
 }
 
 
