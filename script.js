@@ -133,7 +133,7 @@ showResults() {
         resultDiv.style.marginBottom = '50px'; // Add space for tooltip
         
         const resultContent = `
-            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 300px; width: auto;">
             <div class="result-info">
                 <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
                     ${this.userAnswers[index].correct ? '✓' : '✗'}
