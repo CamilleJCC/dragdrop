@@ -241,7 +241,7 @@ p {
 .question-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     width: 100%;
 }
 
@@ -321,6 +321,7 @@ p {
     font-size: clamp(1rem, 2vw, 1.125rem);
     cursor: pointer;
     margin-top: 1rem;
+    width: fit-content;
 }
 
 .artwork-number {
