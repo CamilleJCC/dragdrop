@@ -333,6 +333,7 @@ background: #c4e0ff;
 .option-button.correct {
     background: #b5f0de;
     height: auto;
+    display: block;
 }
 
 .option-button.incorrect {
