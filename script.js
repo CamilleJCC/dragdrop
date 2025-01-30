@@ -20,7 +20,7 @@ const gameData = {
                 "<span class='italic'>Valle boscoso,</span> de la pintora <span class='semibold'>Ithell Colquhoun</span>"
             ],
             correctAnswer: 1,
-            credit: "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>© El domingo o el celo marino, Óscar Domínguez"
+            credit: "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span> © El domingo o el celo marino, Óscar Domínguez"
         },
         {
             image: "assets/26. Pdte..jpg",
@@ -30,7 +30,7 @@ const gameData = {
                 "<span class='italic'>El domingo o el celo marino,</span> del pintor <span class='semibold'>Óscar Domínguez</span>"
             ],
             correctAnswer: 1, // Updated to index 1 for "Paisaje astral"
-            credit: "<span class='italic'>Paisaje astral,</span> del pintor <span class='semibold'>Benjamín Palencia</span>© Paisaje astral, Benjamín Palencia"
+            credit: "<span class='italic'>Paisaje astral,</span> del pintor <span class='semibold'>Benjamín Palencia</span> © Paisaje astral, Benjamín Palencia"
         }
     ]
 };
