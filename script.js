@@ -118,17 +118,19 @@ class ArtQuiz {
     }
 
 showResults() {
-    // Hide the current artwork image
     this.artworkImage.style.display = 'none';
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
+    resultsContainer.style.overflow = 'visible'; // Ensure tooltips can overflow
     
     const threeQuestions = gameData.questions.slice(0, 3);
     
     threeQuestions.forEach((question, index) => {
         const resultDiv = document.createElement('div');
         resultDiv.className = 'artwork';
+        resultDiv.style.position = 'relative'; // Position container for tooltip
+        resultDiv.style.marginBottom = '50px'; // Add space for tooltip
         
         const resultContent = `
             <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
@@ -137,7 +139,7 @@ showResults() {
                     ${this.userAnswers[index].correct ? '✓' : '✗'}
                 </span>
             </div>
-            <div class="tooltip-container">
+            <div class="tooltip-container" style="position: absolute; bottom: -40px; width: 100%;">
                 <button class="plus-icon">+</button>
                 <p class="tooltip-text">${question.credit}</p>
             </div>
@@ -147,7 +149,6 @@ showResults() {
         resultsContainer.appendChild(resultDiv);
     });
     
-    // Clear and replace content
     this.optionsContainer.innerHTML = '';
     this.nextBtn.style.display = 'none';
     this.optionsContainer.replaceChildren(resultsContainer);
