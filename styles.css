@@ -104,7 +104,6 @@ p {
 .artwork {
     width: fit-content;
     height: 400px;
-    overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
 }
