@@ -120,6 +120,7 @@ class ArtQuiz {
 showResults() {
     this.artworkImage.style.display = 'none';
     this.progressBar.style.display = 'none';
+    document.querySelector('.progress-bar').style.display = 'none'; 
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
