@@ -119,8 +119,7 @@ class ArtQuiz {
 
 showResults() {
     this.artworkImage.style.display = 'none';
-    this.progressBar.style.display = 'none';
-    document.querySelector('.progress-bar').style.display = 'none'; 
+    document.querySelector('.progress-bar').style.display = 'none';
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
@@ -132,7 +131,7 @@ showResults() {
         resultDiv.className = 'artwork';
         
         const resultContent = `
-            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 300px; width: auto;">
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
             <div class="tooltip-container">
                 <div class="result-info">
                     <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
@@ -140,14 +139,13 @@ showResults() {
                     </span>
                 </div>
                 <button class="plus-icon" id="plusBtn${index}">+</button>
-                <p class="tooltip-text">${question.credit}</p>
+                <p class="tooltip-text" style="visibility: hidden; display: none;">${question.credit}</p>
             </div>
         `;
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
-
-        // Add click event listener for the plus button
+        
         setTimeout(() => {
             const plusBtn = resultDiv.querySelector('.plus-icon');
             const tooltipText = resultDiv.querySelector('.tooltip-text');
