@@ -46,6 +46,7 @@
     padding: clamp(1rem, 3vw, 2rem);
     color: var(--secondary-color);
     align-items: center;
+    gap: 2rem;
 }
 
 .left-col {
