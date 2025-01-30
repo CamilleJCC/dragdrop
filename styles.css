@@ -312,7 +312,29 @@ p {
         transform: translateY(100vh) rotate(360deg);
     }
 }
+.next-btn {
+    background: var(--primary-color);
+    border: none;
+    padding: 0.9375rem 1.875rem;
+    border-radius: 1.5625rem;
+    color: white;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+    cursor: pointer;
+    margin-top: 1rem;
+}
 
+.artwork-number {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    width: 100%;
+}
 
 /* Animations */
 @keyframes shake {
