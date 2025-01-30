@@ -118,44 +118,43 @@ class ArtQuiz {
     }
 
 showResults() {
-    this.optionsContainer.innerHTML = ''; // Clear previous content
+    this.optionsContainer.innerHTML = '';
     this.nextBtn.style.display = 'none';
     
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
     
-    // Explicitly loop through only the first 3 items
-    const totalArtworks = 3;
-    for(let i = 0; i < totalArtworks; i++) {
-        const question = gameData.questions[i];
+    gameData.questions.slice(0, 3).forEach((question, index) => {
         const resultDiv = document.createElement('div');
         resultDiv.className = 'artwork result-item';
         
         const resultContent = `
-            <div class="artwork-wrapper">
-                <img src="${question.image}" alt="Artwork ${i + 1}" style="height: 400px; width: auto; object-fit: contain;">
+            <div class="artwork-container">
+                <img src="${question.image}" alt="Artwork ${index + 1}" class="artwork-image">
                 <div class="result-info">
-                    <span class="${this.userAnswers[i].correct ? 'correct' : 'incorrect'}">
-                        ${this.userAnswers[i].correct ? '✓' : '✗'}
+                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
+                        ${this.userAnswers[index].correct ? '✓' : '✗'}
                     </span>
                 </div>
-                <div class="tooltip-container">
-                    <div class="plus-icon">+</div>
-                    <div class="tooltip-text">${question.credit}</div>
+                <div class="themes-container">
+                    <div class="plus-container">
+                        <div class="plus">+</div>
+                        <div class="tooltip">${question.credit}</div>
+                    </div>
                 </div>
             </div>
         `;
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
-    }
+    });
     
-    // Replace existing content with results
-    this.optionsContainer.replaceChildren(resultsContainer);
+    this.optionsContainer.innerHTML = '';
+    this.optionsContainer.appendChild(resultsContainer);
 
     this.scoreDisplay.innerHTML = `
-        Score: ${this.score} / ${totalArtworks}
-        ${this.score === totalArtworks ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
+        Score: ${this.score} / 3
+        ${this.score === 3 ? '¡Felicitaciones!' : 'Inténtalo de nuevo'}
     `;
 }
 
