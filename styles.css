@@ -103,7 +103,7 @@ p {
 /* Artworks */
 .artwork {
     width: fit-content;
-    height: 300px;
+    height: 400px;
     overflow: hidden;
     transition: transform 0.3s ease;
     cursor: pointer;
