@@ -124,16 +124,18 @@ showResults() {
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
     
-    gameData.questions.forEach((question, index) => {
+    // Only iterate through the 3 questions
+    for(let i = 0; i < 3; i++) {
+        const question = gameData.questions[i];
         const resultDiv = document.createElement('div');
         resultDiv.className = 'artwork result-item';
         
         const resultContent = `
             <div class="artwork-wrapper">
-                <img src="${question.image}" alt="Artwork ${index + 1}">
+                <img src="${question.image}" alt="Artwork ${i + 1}" style="height: 400px; width: auto; object-fit: contain;">
                 <div class="result-info">
-                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
-                        ${this.userAnswers[index].correct ? '✓' : '✗'}
+                    <span class="${this.userAnswers[i].correct ? 'correct' : 'incorrect'}">
+                        ${this.userAnswers[i].correct ? '✓' : '✗'}
                     </span>
                 </div>
                 <div class="tooltip-container">
@@ -145,7 +147,7 @@ showResults() {
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
-    });
+    }
     
     this.optionsContainer.appendChild(resultsContainer);
 
