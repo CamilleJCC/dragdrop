@@ -38,6 +38,7 @@ class ArtQuiz {
         this.currentQuestion = 0;
         this.score = 0;
         this.userAnswers = [];
+        this.hasAnswered = false;
         this.init();
     }
 
@@ -48,6 +49,14 @@ class ArtQuiz {
         this.scoreDisplay = document.querySelector('.score-display');
         this.revealBtn = document.querySelector('.reveal-btn');
         
+        // Add next button
+        this.nextBtn = document.createElement('button');
+        this.nextBtn.className = 'next-btn';
+        this.nextBtn.textContent = 'Siguiente';
+        this.nextBtn.style.display = 'none';
+        this.nextBtn.addEventListener('click', () => this.nextQuestion());
+        this.optionsContainer.parentNode.appendChild(this.nextBtn);
+        
         this.revealBtn.addEventListener('click', () => this.resetQuiz());
         this.displayQuestion();
     }
@@ -56,12 +65,24 @@ class ArtQuiz {
         const question = gameData.questions[this.currentQuestion];
         this.artworkImage.src = question.image;
         this.optionsContainer.innerHTML = '';
+        this.hasAnswered = false;
+        this.nextBtn.style.display = 'none';
+
+        // Add artwork number
+        const artworkNumber = document.createElement('div');
+        artworkNumber.className = 'artwork-number';
+        artworkNumber.textContent = `Obra ${this.currentQuestion + 1} de ${gameData.questions.length}`;
+        this.optionsContainer.appendChild(artworkNumber);
 
         question.options.forEach((option, index) => {
             const button = document.createElement('button');
             button.className = 'option-button';
             button.innerHTML = option;
-            button.addEventListener('click', () => this.checkAnswer(index));
+            button.addEventListener('click', () => {
+                if (!this.hasAnswered) {
+                    this.checkAnswer(index);
+                }
+            });
             this.optionsContainer.appendChild(button);
         });
 
@@ -71,6 +92,7 @@ class ArtQuiz {
     checkAnswer(selectedIndex) {
         const question = gameData.questions[this.currentQuestion];
         const correct = selectedIndex === question.correctAnswer;
+        this.hasAnswered = true;
         
         if (correct) this.score++;
         
@@ -84,22 +106,31 @@ class ArtQuiz {
         buttons[selectedIndex].classList.add(correct ? 'correct' : 'incorrect');
         buttons[question.correctAnswer].classList.add('correct');
 
-        setTimeout(() => {
-            if (this.currentQuestion < gameData.questions.length - 1) {
-                this.currentQuestion++;
-                this.displayQuestion();
-            } else {
-                this.showResults();
-            }
-        }, 1500);
+        // Show next button or results
+        if (this.currentQuestion < gameData.questions.length - 1) {
+            this.nextBtn.style.display = 'block';
+        } else {
+            setTimeout(() => this.showResults(), 1500);
+        }
+    }
+
+    nextQuestion() {
+        if (this.currentQuestion < gameData.questions.length - 1) {
+            this.currentQuestion++;
+            this.displayQuestion();
+        }
     }
 
     showResults() {
         this.optionsContainer.innerHTML = '';
+        this.nextBtn.style.display = 'none';
+        
+        const resultsContainer = document.createElement('div');
+        resultsContainer.className = 'results-grid';
         
         gameData.questions.forEach((question, index) => {
             const resultDiv = document.createElement('div');
-            resultDiv.className = 'result-item';
+            resultDiv.className = 'artwork result-item';
             
             const resultContent = `
                 <img src="${question.image}" alt="Artwork ${index + 1}">
@@ -113,8 +144,10 @@ class ArtQuiz {
             `;
             
             resultDiv.innerHTML = resultContent;
-            this.optionsContainer.appendChild(resultDiv);
+            resultsContainer.appendChild(resultDiv);
         });
+        
+        this.optionsContainer.appendChild(resultsContainer);
 
         this.scoreDisplay.innerHTML = `
             Score: ${this.score} / ${gameData.questions.length}
@@ -126,6 +159,7 @@ class ArtQuiz {
         this.currentQuestion = 0;
         this.score = 0;
         this.userAnswers = [];
+        this.hasAnswered = false;
         this.displayQuestion();
     }
 
@@ -134,7 +168,3 @@ class ArtQuiz {
         this.progressBar.style.width = `${progress}%`;
     }
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    new ArtQuiz();
-});
