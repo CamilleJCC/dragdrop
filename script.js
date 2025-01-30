@@ -130,7 +130,7 @@ showResults() {
         resultDiv.className = 'artwork';
         
         const resultContent = `
-            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 300px; width: auto;">
             <div class="tooltip-container">
                 <div class="result-info">
                     <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
