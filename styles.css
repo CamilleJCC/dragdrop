@@ -202,10 +202,18 @@ p {
 }
 
 .incorrect {
-    border-color: #f44336;
-    background: rgba(244, 67, 54, 0.1);
-    animation: shake 0.5s ease-in-out;
-    border-radius: 100px;
+     width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #f44336;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.3s ease;
+    margin-top: 2px;
 }
 .tooltip-container {
     position: relative;
@@ -324,10 +332,12 @@ p {
 
 .option-button.correct {
     background: #b5f0de;
+    height: auto;
 }
 
 .option-button.incorrect {
     background: #fab8a1;
+    height: auto;
 }
 
 .progress-bar {
