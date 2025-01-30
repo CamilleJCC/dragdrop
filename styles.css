@@ -263,7 +263,7 @@ span.incorrect {
 }
 
 .tooltip-container {
-     position: relative;
+   position: relative;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -411,7 +411,6 @@ span.incorrect {
         width: 250px;
         height: 250px;
     }
-}
 
 @media (max-width: 768px) {
     .artwork {
