@@ -124,33 +124,46 @@ showResults() {
     const resultsContainer = document.createElement('div');
     resultsContainer.className = 'results-grid';
     
-    gameData.questions.slice(0, 3).forEach((question, index) => {
+    const threeQuestions = gameData.questions.slice(0, 3);
+    
+    threeQuestions.forEach((question, index) => {
         const resultDiv = document.createElement('div');
-        resultDiv.className = 'artwork result-item';
+        resultDiv.className = 'artwork';
         
         const resultContent = `
-            <div class="artwork-container">
-                <img src="${question.image}" alt="Artwork ${index + 1}" class="artwork-image">
-                <div class="result-info">
-                    <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
-                        ${this.userAnswers[index].correct ? '✓' : '✗'}
-                    </span>
-                </div>
-                <div class="themes-container">
-                    <div class="plus-container">
-                        <div class="plus">+</div>
-                        <div class="tooltip">${question.credit}</div>
-                    </div>
-                </div>
+            <img src="${question.image}" alt="Artwork ${index + 1}" style="height: 400px; width: auto;">
+            <div class="result-info">
+                <span class="${this.userAnswers[index].correct ? 'correct' : 'incorrect'}">
+                    ${this.userAnswers[index].correct ? '✓' : '✗'}
+                </span>
+            </div>
+            <div class="tooltip-container">
+                <button class="plus-icon" id="plusBtn${index}">+</button>
+                <p class="tooltip-text">${question.credit}</p>
             </div>
         `;
         
         resultDiv.innerHTML = resultContent;
         resultsContainer.appendChild(resultDiv);
+
+        // Add click event listener for each plus button
+        setTimeout(() => {
+            const plusBtn = document.getElementById(`plusBtn${index}`);
+            const tooltipText = plusBtn.nextElementSibling;
+            
+            plusBtn.addEventListener('click', () => {
+                if (tooltipText.style.visibility === 'visible') {
+                    tooltipText.style.visibility = 'hidden';
+                    tooltipText.style.display = 'none';
+                } else {
+                    tooltipText.style.visibility = 'visible';
+                    tooltipText.style.display = 'block';
+                }
+            });
+        }, 0);
     });
     
-    this.optionsContainer.innerHTML = '';
-    this.optionsContainer.appendChild(resultsContainer);
+    this.optionsContainer.replaceChildren(resultsContainer);
 
     this.scoreDisplay.innerHTML = `
         Score: ${this.score} / 3
