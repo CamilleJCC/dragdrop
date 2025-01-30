@@ -114,9 +114,6 @@ p {
     object-fit: contain;
 }
 
-.artwork:hover {
-    transform: translateY(-5px);
-}
 
 /* Themes */
 .theme {
@@ -215,6 +212,7 @@ p {
     transition: all 0.3s ease;
     margin-top: 2px;
 }
+
 .tooltip-container {
     position: relative;
     display: inline-block;
