@@ -269,8 +269,8 @@ span.incorrect {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 2rem;
-    justify-content: flex-end;
+    margin-top: 1rem;
+    justify-content: center;
 }
 .tooltip-text {
 background: #c4e0ff;
