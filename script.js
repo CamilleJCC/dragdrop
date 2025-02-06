@@ -174,13 +174,23 @@ showResults() {
 
 
 
-    resetQuiz() {
-        this.currentQuestion = 0;
-        this.score = 0;
-        this.userAnswers = [];
-        this.hasAnswered = false;
-        this.displayQuestion();
-    }
+   resetQuiz() {
+    // Reset game state
+    this.currentQuestion = 0;
+    this.score = 0;
+    this.userAnswers = [];
+    this.hasAnswered = false;
+    
+    // Restore hidden elements
+    this.artworkImage.style.display = 'block';
+    document.querySelector('.progress-bar').style.display = 'block';
+    
+    // Clear any results display
+    this.optionsContainer.innerHTML = '';
+    
+    // Display the first question
+    this.displayQuestion();
+}
 
     updateProgress() {
         const progress = ((this.currentQuestion + 1) / gameData.questions.length) * 100;
