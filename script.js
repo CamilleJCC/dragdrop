@@ -157,6 +157,7 @@ showResults() {
                 } else {
                     tooltipText.style.visibility = 'visible';
                     tooltipText.style.display = 'block';
+                    overlay.style.display = 'block';
                 }
             });
         }, 0);
